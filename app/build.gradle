@@ -1,0 +1,82 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.github.corouteam.nappa_kotlin_test"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+project.ext {
+    // Android SDK versions
+    compileSdkVersion = 29
+    targetSdkVersion = 29
+    minSdkVersion = 23
+
+    // Dependencies
+    okhttpVersion = "3.14.8"
+    roomRuntimeVersion = "2.2.5"
+    lifecycleVersion = "2.2.0"
+    rxjavaVersion = "2.1.15"
+    espressoCoreVersion = "3.2.0"
+    runnerVersion = "1.2.0"
+    appcompatVersion = "1.1.0"
+    materialVersion = "1.1.0"
+    cardviewVersion = "1.0.0"
+    gsonVersion = "2.8.5"
+    constraintlayoutVersion = "1.1.3"
+    diffMatchPatch = "1.1"
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation(name:'nappa-prefetching-library', ext:'aar')
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+
+    // NAPPA deps
+    implementation "net.sourceforge.streamsupport:android-retrostreams:1.7.2"
+    implementation "org.bitbucket.cowwoc:diff-match-patch:$diffMatchPatch"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "androidx.room:room-runtime:$roomRuntimeVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
