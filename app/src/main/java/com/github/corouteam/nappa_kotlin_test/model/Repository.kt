@@ -1,6 +1,6 @@
 package com.github.corouteam.nappa_kotlin_test.model
 
-data class CRepo(
+data class Repository(
     var name: String = "",
     var description: String = "",
     var stargazers_count: Int = 0,
