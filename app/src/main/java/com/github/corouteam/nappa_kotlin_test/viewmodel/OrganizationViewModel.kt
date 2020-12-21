@@ -11,8 +11,7 @@ class OrganizationViewModel: ViewModel() {
 
     fun getOrganizationListObservable() = liveData {
         emit(orgRepository
-            .fetchOrganizationList()
-            .asListItem()
+            .fetchOrganizationList().map { it.asListItem() }
         )
     }
 }

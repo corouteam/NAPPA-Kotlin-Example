@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         viewModel.getOrganizationListObservable().observe(this) {
             bindView(it)
         }

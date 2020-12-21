@@ -13,7 +13,6 @@ class RetrofitBuilder {
         fun getGithubService(): GithubService {
             if (retrofitInstance == null) {
                 retrofitInstance = Retrofit.Builder()
-                 //   .client(Nappa.getOkHttp(OkHttpClient()))
                     .baseUrl("https://api.github.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
