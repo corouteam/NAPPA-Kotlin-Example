@@ -46,7 +46,14 @@ class ListItemAdapter(
         // contents of the view with that element
         viewHolder.repoTitle.text = dataSet[position].name
         viewHolder.repoDescription.text = dataSet[position].description
-        viewHolder.metric.text = "${dataSet[position].metric}"
+
+        if (dataSet[position].metric != 0) {
+            with (viewHolder.metric) {
+                text = "${dataSet[position].metric}"
+                visibility = View.VISIBLE
+            }
+        } else { viewHolder.metric.visibility = View.GONE }
+
         viewHolder.metricDescription.text = "${dataSet[position].metricDescription}"
 
         viewHolder.rootView.setOnClickListener { onClick(dataSet[position]) }

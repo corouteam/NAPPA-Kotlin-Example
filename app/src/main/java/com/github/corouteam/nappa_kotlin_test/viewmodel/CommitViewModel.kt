@@ -11,10 +11,7 @@ import com.github.corouteam.nappa_kotlin_test.repository.OrganizationRepositoryI
 class CommitViewModel: ViewModel() {
     private val commitRepository: CommitRepository = CommitRepositoryImpl()
 
-    val name = "Test"
-    val repo = "Test"
-
-    fun getCommitListObservable() = liveData {
+    fun getCommitListObservable(name: String, repo: String) = liveData {
         emit(commitRepository
             .fetchCommitList(name, repo).map { it.asListItem() }
         )

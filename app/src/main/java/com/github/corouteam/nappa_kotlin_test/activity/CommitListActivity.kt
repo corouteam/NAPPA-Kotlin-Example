@@ -20,8 +20,10 @@ class CommitListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_commit_list)
         commitRecyclerView = findViewById(R.id.commitRecyclerView)
 
-        commitRecyclerView.layoutManager = LinearLayoutManager(this)
-        viewModel.getCommitListObservable().observe(this) {
+        val repo = intent?.getStringExtra("repo") ?: ""
+        val name = intent?.getStringExtra("name") ?: ""
+
+        viewModel.getCommitListObservable(name, repo).observe(this) {
             bindView(it)
         }
 
