@@ -10,7 +10,6 @@ interface GithubService {
     @GET("orgs/{org}/repos")
     suspend fun fetchListRepos(@Path("org") org: String?): List<CRepo>
 
-
     @GET("organizations")
     suspend fun fetchOrganizationList(): List<Organization>
 

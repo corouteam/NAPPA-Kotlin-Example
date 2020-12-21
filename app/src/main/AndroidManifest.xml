@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NAPPAKotlinExample">
 
+        <activity android:name=".activity.CommitListActivity"></activity>
         <activity android:name=".activity.RepoListActivity"></activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
