@@ -1,7 +1,8 @@
-package com.github.corouteam.nappa_kotlin_test
+package com.github.corouteam.nappa_kotlin_test.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.github.corouteam.nappa_kotlin_test.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
