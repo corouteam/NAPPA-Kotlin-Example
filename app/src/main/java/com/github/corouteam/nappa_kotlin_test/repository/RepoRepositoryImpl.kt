@@ -1,10 +1,13 @@
 package com.github.corouteam.nappa_kotlin_test.repository
 
-import com.github.corouteam.nappa_kotlin_test.model.Repository
-import com.wideverse.nappa_kotlin_test.GithubService
+import com.github.corouteam.nappa_kotlin_test.model.CRepo
+import com.wideverse.nappa_kotlin_test.RetrofitBuilder
 
 class RepoRepositoryImpl: RepoRepository {
-    override suspend fun fetchRepositoryByOrganizationId(organizationUid: String): List<Repository> {
-        return listOf()
+    private val service = RetrofitBuilder.getGithubService()
+
+    override suspend fun fetchRepositoryByOrganizationId(organizationUid: String): List<CRepo> {
+        val res = service.fetchListRepos(organizationUid)
+        return  res
     }
 }
