@@ -7,7 +7,7 @@
     tools:context=".activity.CommitListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/commit_list"
+        android:id="@+id/commitRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
