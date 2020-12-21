@@ -9,19 +9,19 @@ class RetrofitBuilder {
     companion object {
         private var retrofitInstance: Retrofit? = null
         private var service: GithubService? = null
-    }
 
-    fun getGithubService(): GithubService {
-        if (retrofitInstance == null) {
-            retrofitInstance = Retrofit.Builder()
-            .client(Nappa.getOkHttp(OkHttpClient()))
-                .baseUrl("https://api.github.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+        fun getGithubService(): GithubService {
+            if (retrofitInstance == null) {
+                retrofitInstance = Retrofit.Builder()
+                    .client(Nappa.getOkHttp(OkHttpClient()))
+                    .baseUrl("https://api.github.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
 
-            service = retrofitInstance!!.create(GithubService::class.java)
+                service = retrofitInstance!!.create(GithubService::class.java)
+            }
+
+            return service!!
         }
-
-        return service!!
     }
 }
