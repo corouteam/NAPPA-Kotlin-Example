@@ -9,7 +9,8 @@ import com.github.corouteam.nappa_kotlin_test.R
 import com.github.corouteam.nappa_kotlin_test.model.CRepo
 
 
-class RepoListAdapter(private val dataSet: List<CRepo>) :
+class RepoListAdapter(private val dataSet: List<CRepo>,
+                      val onClick: (selected: CRepo) -> Unit) :
     RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
     /**
@@ -17,6 +18,7 @@ class RepoListAdapter(private val dataSet: List<CRepo>) :
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+         val rootLayout: View = view.findViewById(R.id.rootView)
          val repoTitle: TextView = view.findViewById(R.id.repoTitle)
          val repoDescription: TextView = view.findViewById(R.id.repoDesc)
          val starCount: TextView = view.findViewById(R.id.starCount)
@@ -47,7 +49,7 @@ class RepoListAdapter(private val dataSet: List<CRepo>) :
         viewHolder.forkCount.text = "${dataSet[position].forks_count}"
         viewHolder.starCount.text = "${dataSet[position].stargazers_count}"
         viewHolder.viewersCount.text = "${dataSet[position].watchers_count}"
-
+        viewHolder.rootLayout.setOnClickListener { onClick(dataSet[position]) }
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -7,7 +7,7 @@ import com.github.corouteam.nappa_kotlin_test.repository.RepoRepositoryImpl
 
 class RepoListViewModel: ViewModel() {
     val repository: RepoRepository
-    private var organizationId: String = ""
+    var organizationId: String = ""
 
     init {
         repository = RepoRepositoryImpl()

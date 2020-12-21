@@ -1,5 +1,6 @@
 package com.github.corouteam.nappa_kotlin_test.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -19,11 +20,9 @@ class RepoListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo_list)
 
-        val organizationUid = intent?.getStringExtra("organization") ?: ""
-
         repoRecyclerView = findViewById(R.id.repoRecyclerView)
 
-        viewModel.initOrganizationId(organizationUid)
+        viewModel.initOrganizationId(intent?.getStringExtra("organization") ?: "")
         viewModel.getRepoListObservable().observe(this){
             bindView(it)
         }
@@ -32,7 +31,17 @@ class RepoListActivity : AppCompatActivity() {
     fun bindView(listItems: List<CRepo>) {
         with (repoRecyclerView) {
             layoutManager = LinearLayoutManager(this@RepoListActivity)
-            repoRecyclerView.adapter = RepoListAdapter(listItems)
+            repoRecyclerView.adapter = RepoListAdapter(listItems) {
+                openCommitActivity(viewModel.organizationId, it.name)
+            }
         }
+    }
+
+    fun openCommitActivity(owner: String, repo: String) {
+        val intent = Intent(this, CommitListActivity::class.java)
+        intent.putExtra("name", owner)
+        intent.putExtra("repo", repo)
+
+        startActivity(intent)
     }
 }
