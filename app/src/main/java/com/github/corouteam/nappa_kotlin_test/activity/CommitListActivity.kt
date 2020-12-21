@@ -6,11 +6,13 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.corouteam.nappa_kotlin_test.R
-import com.github.corouteam.nappa_kotlin_test.adapter.RepoListAdapter
-import com.github.corouteam.nappa_kotlin_test.viewmodel.RepoListViewModel
+import com.github.corouteam.nappa_kotlin_test.adapter.ListItemAdapter
+import com.github.corouteam.nappa_kotlin_test.model.ListItem
+import com.github.corouteam.nappa_kotlin_test.viewmodel.CommitViewModel
+
 
 class CommitListActivity : AppCompatActivity() {
-    val viewModel: RepoListViewModel by viewModels()
+    private val viewModel: CommitViewModel by viewModels()
     lateinit var commitRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +21,16 @@ class CommitListActivity : AppCompatActivity() {
         commitRecyclerView = findViewById(R.id.commitRecyclerView)
 
         commitRecyclerView.layoutManager = LinearLayoutManager(this)
-        //commitRecyclerView.adapter =
+        viewModel.getCommitListObservable().observe(this) {
+            bindView(it)
+        }
 
+    }
+
+    fun bindView(listItems: List<ListItem>) {
+        with (commitRecyclerView) {
+            adapter = ListItemAdapter(listItems){}
+            layoutManager = LinearLayoutManager(this@CommitListActivity)
+        }
     }
 }

@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.corouteam.nappa_kotlin_test.R
-import com.github.corouteam.nappa_kotlin_test.model.CRepo
+import com.github.corouteam.nappa_kotlin_test.model.Repository
 
 
-class RepoListAdapter(private val dataSet: List<CRepo>,
-                      val onClick: (selected: CRepo) -> Unit) :
+class RepoListAdapter(private val dataSet: List<Repository>,
+                      val onClick: (selected: Repository) -> Unit) :
     RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
     /**
