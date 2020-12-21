@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.corouteam.nappa_kotlin_test.R
+import com.github.corouteam.nappa_kotlin_test.adapter.ListItemAdapter
 import com.github.corouteam.nappa_kotlin_test.model.ListItem
 import com.github.corouteam.nappa_kotlin_test.viewmodel.OrganizationViewModel
 
@@ -23,20 +24,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         searchButton = findViewById(R.id.searchButton)
+        organizationRecyclerView = findViewById(R.id.organizationRecyclerView)
+
         val intent = Intent(this, RepoListActivity::class.java)
         searchButton.setOnClickListener {
             startActivity(intent)
         }
 
-        /*
-        viewModel.getOrganizationListObservable().observe(this) {
 
-        }*/
+        viewModel.getOrganizationListObservable().observe(this) {
+            bindView(it)
+        }
     }
 
     fun bindView(listItems: List<ListItem>) {
         with (organizationRecyclerView) {
-            adapter = adapter
+            adapter = ListItemAdapter(listItems)
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
     }
