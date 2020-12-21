@@ -28,9 +28,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        /*
         viewModel.getOrganizationListObservable().observe(this) {
 
-        }
+        }*/
     }
 
     fun bindView(listItems: List<ListItem>) {
