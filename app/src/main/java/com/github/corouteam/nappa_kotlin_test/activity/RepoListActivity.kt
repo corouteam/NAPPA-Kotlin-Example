@@ -14,11 +14,15 @@ import java.util.*
 class RepoListActivity : AppCompatActivity() {
     val viewModel: RepoListViewModel by viewModels()
     lateinit var repoRecyclerView: RecyclerView
-    val organizationUid: String = "corouteam"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo_list)
+
+        val organizationUid = intent?.getStringExtra("organization") ?: ""
+
         repoRecyclerView = findViewById(R.id.repoRecyclerView)
+
         viewModel.initOrganizationId(organizationUid)
         viewModel.getRepoListObservable().observe(this){
             bindView(it)
@@ -31,5 +35,4 @@ class RepoListActivity : AppCompatActivity() {
             repoRecyclerView.adapter = RepoListAdapter(listItems)
         }
     }
-
 }
