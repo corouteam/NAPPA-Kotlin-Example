@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.corouteam.nappa_kotlin_test.R
 import com.github.corouteam.nappa_kotlin_test.model.ListItem
 
-class ListItemAdapter(private val dataSet: List<ListItem>) :
+class ListItemAdapter(
+    private val dataSet: List<ListItem>,
+    private val onClick: (selectedItem: ListItem) -> Unit
+) :
     RecyclerView.Adapter<ListItemAdapter.ViewHolder>() {
 
     /**
@@ -16,6 +19,7 @@ class ListItemAdapter(private val dataSet: List<ListItem>) :
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val rootView: View = view.findViewById(R.id.layoutRoot)
         val repoTitle: TextView = view.findViewById(R.id.repoTitle)
         val repoDescription: TextView = view.findViewById(R.id.repoDesc)
         val metric: TextView = view.findViewById(R.id.metric)
@@ -45,6 +49,7 @@ class ListItemAdapter(private val dataSet: List<ListItem>) :
         viewHolder.metric.text = "${dataSet[position].metric}"
         viewHolder.metricDescription.text = "${dataSet[position].metricDescription}"
 
+        viewHolder.rootView.setOnClickListener { onClick(dataSet[position]) }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
