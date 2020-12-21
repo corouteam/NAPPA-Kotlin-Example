@@ -6,22 +6,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.corouteam.nappa_kotlin_test.R
-import com.github.corouteam.nappa_kotlin_test.model.CRepo
+import com.github.corouteam.nappa_kotlin_test.model.ListItem
 
-
-class RepoListAdapter(private val dataSet: List<CRepo>) :
-    RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
+class ListItemAdapter(private val dataSet: List<ListItem>) :
+    RecyclerView.Adapter<ListItemAdapter.ViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-         val repoTitle: TextView = view.findViewById(R.id.repoTitle)
-         val repoDescription: TextView = view.findViewById(R.id.repoDesc)
-         val starCount: TextView = view.findViewById(R.id.starCount)
-         val forkCount: TextView = view.findViewById(R.id.forkCount)
-         val viewersCount: TextView = view.findViewById(R.id.viewersCount)
+        val repoTitle: TextView = view.findViewById(R.id.repoTitle)
+        val repoDescription: TextView = view.findViewById(R.id.repoDesc)
+        val metric: TextView = view.findViewById(R.id.metric)
+        val metricDescription: TextView = view.findViewById(R.id.metricDescription)
 
         init {
             // Define click listener for the ViewHolder's View.
@@ -32,7 +30,7 @@ class RepoListAdapter(private val dataSet: List<CRepo>) :
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_repo, viewGroup, false)
+            .inflate(R.layout.item_list_item, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -44,9 +42,8 @@ class RepoListAdapter(private val dataSet: List<CRepo>) :
         // contents of the view with that element
         viewHolder.repoTitle.text = dataSet[position].name
         viewHolder.repoDescription.text = dataSet[position].description
-        viewHolder.forkCount.text = "${dataSet[position].forks_count}"
-        viewHolder.starCount.text = "${dataSet[position].stargazers_count}"
-        viewHolder.viewersCount.text = "${dataSet[position].watchers_count}"
+        viewHolder.metric.text = "${dataSet[position].metric}"
+        viewHolder.metricDescription.text = "${dataSet[position].metricDescription}"
 
     }
 
