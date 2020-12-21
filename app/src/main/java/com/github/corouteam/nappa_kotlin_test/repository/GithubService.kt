@@ -1,7 +1,7 @@
 package com.wideverse.nappa_kotlin_test
 
-import com.github.corouteam.nappa_kotlin_test.model.CRepo
 import com.github.corouteam.nappa_kotlin_test.model.Commit
+import com.github.corouteam.nappa_kotlin_test.model.Repository
 import com.github.corouteam.nappa_kotlin_test.model.Organization
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -9,7 +9,7 @@ import retrofit2.http.Path
 
 interface GithubService {
     @GET("orgs/{org}/repos")
-    suspend fun fetchListRepos(@Path("org") org: String?): List<CRepo>
+    suspend fun fetchListRepos(@Path("org") org: String?): List<Repository>
 
     @GET("organizations")
     suspend fun fetchOrganizationList(): List<Organization>

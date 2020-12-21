@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var searchButton: ImageView
     private lateinit var organizationRecyclerView: RecyclerView
+    private lateinit var searchText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,22 +27,29 @@ class MainActivity : AppCompatActivity() {
 
         searchButton = findViewById(R.id.searchButton)
         organizationRecyclerView = findViewById(R.id.organizationRecyclerView)
+        searchText = findViewById(R.id.searchText)
 
-        val intent = Intent(this, RepoListActivity::class.java)
         searchButton.setOnClickListener {
-            startActivity(intent)
+            openRepoListActivity(searchText.text.toString())
         }
-
 
         viewModel.getOrganizationListObservable().observe(this) {
             bindView(it)
         }
     }
 
-    fun bindView(listItems: List<ListItem>) {
+    private fun bindView(listItems: List<ListItem>) {
         with (organizationRecyclerView) {
-            adapter = ListItemAdapter(listItems)
+            adapter = ListItemAdapter(listItems) {
+                openRepoListActivity(it.name)
+            }
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
+    }
+
+    private fun openRepoListActivity(name: String) {
+        val intent = Intent(this, RepoListActivity::class.java)
+        intent.putExtra("organization", name)
+        startActivity(intent)
     }
 }
